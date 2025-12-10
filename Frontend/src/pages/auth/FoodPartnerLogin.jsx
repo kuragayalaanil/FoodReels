@@ -1,6 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const FoodPartnerLogin = () => {
+  const Navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const {email, password} = formData;
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/food/food-partner/login",
+        {
+          email,
+          password,
+        },
+        { withCredentials: true }
+      );
+
+      console.log(response.data);
+
+      Navigate("/create-food");
+    } catch (error) {
+      console.log("There was an error Logging!", error);
+    }
+  };
+
   return (
     <div className="auth-page-wrapper">
       <div
@@ -16,7 +56,7 @@ const FoodPartnerLogin = () => {
             Access your dashboard and manage orders.
           </p>
         </header>
-        <form className="auth-form" noValidate>
+        <form onSubmit={handleSubmit} className="auth-form" noValidate>
           <div className="field-group">
             <label htmlFor="email">Email</label>
             <input
@@ -25,6 +65,7 @@ const FoodPartnerLogin = () => {
               type="email"
               placeholder="business@example.com"
               autoComplete="email"
+              onChange={handleChange}
             />
           </div>
           <div className="field-group">
@@ -35,6 +76,7 @@ const FoodPartnerLogin = () => {
               type="password"
               placeholder="Password"
               autoComplete="current-password"
+              onChange={handleChange}
             />
           </div>
           <button className="auth-submit" type="submit">

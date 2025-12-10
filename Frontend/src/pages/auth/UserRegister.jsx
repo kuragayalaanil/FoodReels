@@ -1,8 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../styles/auth-shared.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const UserRegister = () => {
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { firstName, lastName, email, password } = formData;
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/user/register",
+        {
+          fullName: `${firstName} ${lastName}`,
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(response.data);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      alert("User Registeration Failed");
+    }
+  };
+
   return (
     <div className="auth-page-wrapper">
       <div
@@ -23,7 +65,7 @@ const UserRegister = () => {
           <Link to="/user/register">User</Link> •{" "}
           <Link to="/food-partner/register">Food partner</Link>
         </nav>
-        <form action="" className="auth-form">
+        <form onSubmit={handleSubmit} className="auth-form">
           <div className="two-col">
             <div className="field-group">
               <label htmlFor="firstName">First Name</label>
@@ -32,6 +74,7 @@ const UserRegister = () => {
                 name="firstName"
                 placeholder="Jane"
                 autoComplete="given-name"
+                onChange={handleChange}
               />
             </div>
             <div className="field-group">
@@ -41,6 +84,7 @@ const UserRegister = () => {
                 name="lastName"
                 placeholder="Doe"
                 autoComplete="family-name"
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -53,6 +97,7 @@ const UserRegister = () => {
               type="email"
               placeholder="you@example.com"
               autoComplete="email"
+              onChange={handleChange}
             />
           </div>
 
@@ -64,6 +109,7 @@ const UserRegister = () => {
               name="password"
               placeholder="••••••••"
               autoComplete="new-password"
+              onChange={handleChange}
             />
           </div>
 
