@@ -1,5 +1,6 @@
 import React from "react";
 import "../../styles/auth-shared.css";
+import { Link } from "react-router-dom";
 
 const UserRegister = () => {
   return (
@@ -18,7 +19,9 @@ const UserRegister = () => {
           </p>
         </header>
         <nav className="auth-alt-action" style={{ marginTop: "-4px" }}>
-          <strong style={{ fontWeight: 600 }}>User</strong>
+          <strong style={{ fontWeight: 600 }}>Switch:</strong>{" "}
+          <Link to="/user/register">User</Link> •{" "}
+          <Link to="/food-partner/register">Food partner</Link>
         </nav>
         <form action="" className="auth-form">
           <div className="two-col">
@@ -68,7 +71,9 @@ const UserRegister = () => {
             Sign Up
           </button>
         </form>
-        <div className="auth-alt-action">Already have an account?</div>
+        <div className="auth-alt-action">
+          Already have an account? <Link to="/user/login">Sign in</Link>
+        </div>
       </div>
     </div>
   );
