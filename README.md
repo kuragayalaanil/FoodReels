@@ -127,9 +127,11 @@ http://localhost:3000/
 | POST   | `api/food/food-partner/login`     | Login user           |
 | GET    | `api/food/food-partner/logout`    | Logout user          |
 
-🎥 Reel Routes
-| Method | Endpoint              | Description        |
-| ------ | --------------------- | ------------------ |
+🎥 Reel Routes - Food Items
+| Method | Endpoint                          | Description        |
+| ------ | ---------------------             | ------------------ |
+| POST   | `api/food/food/create-food`       | Register FoodPartner |
+| GET    | `api/food/food/fooditems`         | Logout user          |
 
 
 🤝 Contributing
