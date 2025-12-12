@@ -55,6 +55,16 @@ npm run dev
 ✅Your app will run at: 
 http://localhost:5173/
 
+🔗 API Integration
+
+The frontend interacts with your backend using endpoints like:
+
+POST /api/user/register
+POST /api/user/login
+POST /api/food-partner/register
+POST /api/food-partner/login
+POST /api/foods/create-food (requires JWT cookie)
+
 _______________________________________________________________
 
 🍔 Food Reels – Backend (Node.js + Express + MongoDB)
