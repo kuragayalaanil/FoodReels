@@ -141,7 +141,7 @@ http://localhost:3000/
 | Method | Endpoint                          | Description        |
 | ------ | ---------------------             | ------------------ |
 | POST   | `api/food/food/create-food`       | Register FoodPartner |
-| GET    | `api/food/food/fooditems`         | Logout user          |
+| GET    | `api/food/food/fooditems`         |  Reels Feed         |
 
 
 🤝 Contributing
